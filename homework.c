@@ -160,7 +160,6 @@ void resize(image *in, image *out) {
         out->pixel[i] = malloc(out->width * (in->type == COLOR ? 3 : 1));
 
     for (i = 0; i < num_threads; i++) {
-        threadArgs[i].threadID = i;
         threadArgs[i].in = in;
         threadArgs[i].out = out;
         threadArgs[i].jobBounds = jobBoundsForThread(i, numBlocks);

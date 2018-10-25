@@ -29,7 +29,7 @@ typedef struct {
 } bounds;
 
 typedef struct {
-    int threadID, numBlocksOnLine;
+    int numBlocksOnLine;
     bounds jobBounds;
     image *in, *out;
 } thread_data;
