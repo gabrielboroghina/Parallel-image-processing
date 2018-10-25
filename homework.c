@@ -55,8 +55,8 @@ void writeData(const char *fileName, image *img) {
 
 void blockCompress(void **in, image_type imgType, void **out, int xBlock, int yBlock) {
     int i, j, c;
-    color_pixel colorPixel = {0};
-    grayscale_pixel grayscalePixel = {0};
+    int colorPixel[3] = {0}; // int to avoid overflows
+    int grayscalePixel = 0;
 
     int x = xBlock * resize_factor;
     int y = yBlock * resize_factor;
@@ -66,44 +66,46 @@ void blockCompress(void **in, image_type imgType, void **out, int xBlock, int yB
             for (j = y; j < y + 3; j++) {
                 if (imgType == COLOR) {
                     for (c = 0; c < 3; c++) {
-                        colorPixel.channel[c] += ((color_pixel **) in)[i][j].channel[c] * gaussianKernel[i - x][j - x];
+                        colorPixel[c] += ((color_pixel **) in)[i][j].channel[c] * gaussianKernel[i - x][j - y];
                     }
                 } else {
-                    grayscalePixel.l += ((grayscale_pixel **) in)[i][j].l * gaussianKernel[i - x][j - x];
+                    grayscalePixel += ((grayscale_pixel **) in)[i][j].l * gaussianKernel[i - x][j - y];
                 }
             }
 
         if (imgType == COLOR) {
             for (c = 0; c < 3; c++)
-                colorPixel.channel[c] /= 16;
+                colorPixel[c] /= 16;
         } else {
-            grayscalePixel.l /= 16;
+            grayscalePixel /= 16;
         }
     } else {
         // compute pixels' arithmetic mean
-        for (i = xBlock; i <= xBlock + resize_factor; i++)
-            for (j = yBlock; j <= yBlock + resize_factor; j++) {
+        for (i = x; i < x + resize_factor; i++)
+            for (j = y; j < y + resize_factor; j++) {
                 if (imgType == COLOR) {
                     for (c = 0; c < 3; c++)
-                        colorPixel.channel[c] += ((color_pixel **) in)[i][j].channel[c];
+                        colorPixel[c] += ((color_pixel **) in)[i][j].channel[c];
                 } else {
-                    grayscalePixel.l += ((grayscale_pixel **) in)[i][j].l;
+                    grayscalePixel += ((grayscale_pixel **) in)[i][j].l;
                 }
             }
 
         int resize_factor2 = resize_factor * resize_factor;
         if (imgType == COLOR) {
             for (c = 0; c < 3; c++)
-                colorPixel.channel[c] /= resize_factor2;
+                colorPixel[c] /= resize_factor2;
         } else {
-            grayscalePixel.l /= resize_factor2;
+            grayscalePixel /= resize_factor2;
         }
     }
 
-    if (imgType == COLOR)
-        ((color_pixel **) out)[xBlock][yBlock] = colorPixel;
-    else
-        ((grayscale_pixel **) out)[xBlock][yBlock] = grayscalePixel;
+    if (imgType == COLOR) {
+        for (c = 0; c < 3; c++)
+            ((color_pixel **) out)[xBlock][yBlock].channel[c] = colorPixel[c];
+    } else {
+        ((grayscale_pixel **) out)[xBlock][yBlock].l = grayscalePixel;
+    }
 }
 
 void *chunkResize(void *args) {
