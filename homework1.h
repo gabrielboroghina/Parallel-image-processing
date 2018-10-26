@@ -1,3 +1,5 @@
+// Gabriel Boroghina, 333CB
+
 #ifndef HOMEWORK_H1
 #define HOMEWORK_H1
 
@@ -16,6 +18,9 @@ typedef struct {
     int begin, end;
 } bounds;
 
+/**
+ * Arguments to be sent to the thread
+ */
 typedef struct {
     bounds jobBounds;
     image *img;

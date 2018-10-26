@@ -1,3 +1,5 @@
+// Gabriel Boroghina, 333CB
+
 #include "homework.h"
 
 #include <stdio.h>
@@ -53,61 +55,56 @@ void writeData(const char *fileName, image *img) {
     fclose(imageFile);
 }
 
+/**
+ * Compress a block of size resize_factor x resize_factor pixels into a single pixel.
+ */
 void blockCompress(void **in, image_type imgType, void **out, int xBlock, int yBlock) {
     int i, j, c;
-    int colorPixel[3] = {0}; // int to avoid overflows
-    int grayscalePixel = 0;
+    short colorPixel[3] = {0}; // not unsigned char to avoid overflows
+    short grayscalePixel = 0;
 
+    // compute the start of the block
     int x = xBlock * resize_factor;
     int y = yBlock * resize_factor;
+
+    int coefSum = (resize_factor == 3) ? 16 : (resize_factor * resize_factor);
     if (resize_factor == 3) {
         // apply Gaussian Filter
         for (i = x; i < x + 3; i++)
             for (j = y; j < y + 3; j++) {
-                if (imgType == COLOR) {
-                    for (c = 0; c < 3; c++) {
-                        colorPixel[c] += ((color_pixel **) in)[i][j].channel[c] * gaussianKernel[i - x][j - y];
-                    }
-                } else {
-                    grayscalePixel += ((grayscale_pixel **) in)[i][j].l * gaussianKernel[i - x][j - y];
-                }
+                if (imgType == COLOR)
+                    for (c = 0; c < 3; c++)
+                        colorPixel[c] += ((color_pixel **) in)[i][j].channel[c] *
+                                         gaussianKernel[i - x][j - y];
+                else
+                    grayscalePixel += ((grayscale_pixel **) in)[i][j].l *
+                                      gaussianKernel[i - x][j - y];
             }
-
-        if (imgType == COLOR) {
-            for (c = 0; c < 3; c++)
-                colorPixel[c] /= 16;
-        } else {
-            grayscalePixel /= 16;
-        }
     } else {
         // compute pixels' arithmetic mean
         for (i = x; i < x + resize_factor; i++)
             for (j = y; j < y + resize_factor; j++) {
-                if (imgType == COLOR) {
+                if (imgType == COLOR)
                     for (c = 0; c < 3; c++)
                         colorPixel[c] += ((color_pixel **) in)[i][j].channel[c];
-                } else {
+                else
                     grayscalePixel += ((grayscale_pixel **) in)[i][j].l;
-                }
             }
-
-        int resize_factor2 = resize_factor * resize_factor;
-        if (imgType == COLOR) {
-            for (c = 0; c < 3; c++)
-                colorPixel[c] /= resize_factor2;
-        } else {
-            grayscalePixel /= resize_factor2;
-        }
     }
 
-    if (imgType == COLOR) {
+    // set the pixel in the output image
+    if (imgType == COLOR)
         for (c = 0; c < 3; c++)
-            ((color_pixel **) out)[xBlock][yBlock].channel[c] = colorPixel[c];
-    } else {
-        ((grayscale_pixel **) out)[xBlock][yBlock].l = grayscalePixel;
-    }
+            ((color_pixel **) out)[xBlock][yBlock].channel[c] = colorPixel[c] / coefSum;
+    else
+        ((grayscale_pixel **) out)[xBlock][yBlock].l = grayscalePixel / coefSum;
 }
 
+/**
+ * Resize the blocks from [start, end).
+ * Blocks' indices are considered to increase from top to bottom and from left
+ * to right in the pixel matrix.
+ */
 void *chunkResize(void *args) {
     thread_data threadArgs = *(thread_data *) args;
     int begin = threadArgs.jobBounds.begin;
@@ -121,6 +118,7 @@ void *chunkResize(void *args) {
 
     for (int i = begin; i < end; i++) {
         blockCompress(in, threadArgs.in->type, out, x, y);
+        // move to the next block
         y++;
         if (y == threadArgs.numBlocksOnLine) {
             x++;
@@ -151,6 +149,7 @@ void resize(image *in, image *out) {
     int numBlocksOnLine = in->width / resize_factor;
     int numBlocks = (in->height / resize_factor) * numBlocksOnLine;
 
+    // initialize the output image
     out->type = in->type;
     out->height = in->height / resize_factor;
     out->width = numBlocksOnLine;
@@ -164,7 +163,7 @@ void resize(image *in, image *out) {
         threadArgs[i].out = out;
         threadArgs[i].jobBounds = jobBoundsForThread(i, numBlocks);
         threadArgs[i].numBlocksOnLine = numBlocksOnLine;
-        pthread_create(&(thread[i]), NULL, chunkResize, &threadArgs[i]);
+        pthread_create(&thread[i], NULL, chunkResize, &threadArgs[i]);
     }
 
     for (i = 0; i < num_threads; i++)

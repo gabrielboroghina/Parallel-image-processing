@@ -1,3 +1,5 @@
+// Gabriel Boroghina, 333CB
+
 #include "homework1.h"
 
 #include <stdio.h>
@@ -17,10 +19,14 @@ void initialize(image *img) {
         img->pixel[i] = (grayscale_pixel *) malloc(img->width);
 }
 
+/**
+ * Render the pixel at the position (i, j) in the pixel matrix
+ */
 void pixelRender(image *img, int i, int j) {
-    // compute pixel's position in image
+    // compute pixel's coordinates in the image based on its position in the pixel matrix
     int x = j;
     int y = img->height - i - 1;
+
     // compute pixel's center position
     double xCenter = (double) 50 / img->width * (2 * x + 1);
     double yCenter = (double) 50 / img->height * (2 * y + 1);
@@ -31,17 +37,24 @@ void pixelRender(image *img, int i, int j) {
     img->pixel[i][j] = (dist <= 3) ? PIXEL_BLACK : PIXEL_WHITE;
 }
 
+/**
+ * Render the sequence of pixels from [start, end).
+ * Pixels' indices are considered to increase from top to bottom and from left to
+ * right in the pixel matrix:
+ *     pixel_index = pixel_line * img_width + pixel_column;
+ */
 void *chunkRender(void *args) {
     thread_data threadArgs = *(thread_data *) args;
     int begin = threadArgs.jobBounds.begin;
     int end = threadArgs.jobBounds.end;
 
     image *img = threadArgs.img;
-    int x = begin / img->height;
+    int x = begin / img->width;
     int y = begin % img->width;
 
     for (int i = begin; i < end; i++) {
         pixelRender(img, x, y);
+        // move to the next pixel
         y++;
         if (y == img->width) {
             x++;
@@ -52,10 +65,10 @@ void *chunkRender(void *args) {
     return NULL;
 }
 
-bounds jobBoundsForThread(int threadID, int numBlocks) {
+bounds jobBoundsForThread(int threadID, int numPixels) {
     bounds jobBounds;
-    int chunkSize = numBlocks / num_threads;
-    int r = numBlocks % num_threads;
+    int chunkSize = numPixels / num_threads;
+    int r = numPixels % num_threads;
 
     jobBounds.begin = threadID * chunkSize + (threadID < r ? threadID : r);
     jobBounds.end = jobBounds.begin + chunkSize + (threadID < r ? 1 : 0);
@@ -64,18 +77,18 @@ bounds jobBoundsForThread(int threadID, int numBlocks) {
 }
 
 void render(image *img) {
-    int i;
     pthread_t thread[num_threads];
     thread_data threadArgs[num_threads];
 
     int numPixels = img->height * img->width;
-    for (i = 0; i < num_threads; i++) {
+    // distribute the pixel matrix in chunks and render them on threads
+    for (int i = 0; i < num_threads; i++) {
         threadArgs[i].img = img;
         threadArgs[i].jobBounds = jobBoundsForThread(i, numPixels);
-        pthread_create(&(thread[i]), NULL, chunkRender, &threadArgs[i]);
+        pthread_create(&thread[i], NULL, chunkRender, &threadArgs[i]);
     }
 
-    for (i = 0; i < num_threads; i++)
+    for (int i = 0; i < num_threads; i++)
         pthread_join(thread[i], NULL);
 }
 

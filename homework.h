@@ -1,3 +1,5 @@
+// Gabriel Boroghina, 333CB
+
 #ifndef HOMEWORK_H
 #define HOMEWORK_H
 
@@ -5,7 +7,7 @@
 #define IMG_TYPE_GRAYSCALE '5'
 
 typedef struct {
-    unsigned char channel[3];
+    unsigned char channel[3]; // channel[0] = red, channel[1] = green, channel[2] = blue
 }__attribute__((packed)) color_pixel;
 
 typedef struct {
@@ -28,6 +30,9 @@ typedef struct {
     int begin, end;
 } bounds;
 
+/**
+ * Arguments to be sent to the thread
+ */
 typedef struct {
     int numBlocksOnLine;
     bounds jobBounds;
