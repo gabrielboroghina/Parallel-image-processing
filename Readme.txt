@@ -12,6 +12,7 @@ facut astfel incat toate threadurile sa aiba acelasi numar de blocuri de procesa
 cu exceptia primelor r, care mai au un bloc in plus, unde r = restul impartirii
 numarului de blocuri la numarul de threaduri.
 
+
 --------------------------------------TASK 1--------------------------------------
 
     Imaginea este retinuta folosind structura image, ce contine tipul imaginii
@@ -32,10 +33,6 @@ imaginii de iesire.
 (blocurile din imaginea initiala sunt disjuncte, iar pixelii din matricea finala
 sunt diferiti), deci nu este nevoie de sincronizarea threadurilor.
 
-    Speedup (conform timpilor de pe checker, earth_color, resize_factor = 2):
-    * 2 threads vs 1: 1.41
-    * 4 threads vs 1: 2.37
-    * 8 threads vs 1: 4.73
 
 --------------------------------------TASK 2--------------------------------------
 
@@ -52,8 +49,3 @@ convertita in coordonate reale in planul 2D (trecand la cm). Folosind aceste
 coordonate reale si ecuatia dreptei se determina distanta de la centrul pixelului la
 dreapta. Daca distanta este <= 3, pixelul va fi umplut cu negru, altfel va fi umplut
 cu alb.
-
-    Speedup (conform timpilor de pe checker, resolution = 8000):
-    * 2 threads vs 1: 1.37
-    * 4 threads vs 1: 2.38
-    * 8 threads vs 1: 4.3

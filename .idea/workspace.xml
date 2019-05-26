@@ -11,13 +11,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5df75ff0-6a0d-4212-877f-1ac18365c551" name="Default Changelist" comment="">
+    <list default="true" id="5df75ff0-6a0d-4212-877f-1ac18365c551" name="Default Changelist" comment="Completed README + code cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Readme.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Readme.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework.c" beforeDir="false" afterPath="$PROJECT_DIR$/homework.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework.h" beforeDir="false" afterPath="$PROJECT_DIR$/homework.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1.c" beforeDir="false" afterPath="$PROJECT_DIR$/homework1.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/homework1.h" beforeDir="false" afterPath="$PROJECT_DIR$/homework1.h" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,12 +27,14 @@
     <session id="-1220551368">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="8" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.10" value="1" />
+          <entry key="project.open.time.3" value="1" />
           <entry key="project.open.time.5" value="1" />
           <entry key="project.open.time.8" value="2" />
           <entry key="project.open.time.9" value="3" />
-          <entry key="project.opened" value="7" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -62,7 +60,7 @@
           <entry key="c" value="5867" />
           <entry key="h" value="1123" />
           <entry key="m" value="174" />
-          <entry key="txt" value="3784" />
+          <entry key="txt" value="3824" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -71,7 +69,7 @@
           <entry key="Doxygen file" value="11" />
           <entry key="GDBCommands" value="33" />
           <entry key="ObjectiveC" value="7153" />
-          <entry key="PLAIN_TEXT" value="3740" />
+          <entry key="PLAIN_TEXT" value="3780" />
         </counts>
       </usages-collector>
     </session>
@@ -90,17 +88,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/homework.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="289">
+              <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/homework.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="80" column="67" lean-forward="true" selection-start-line="80" selection-start-column="67" selection-end-line="80" selection-end-column="67" />
+            <state relative-caret-position="325">
+              <caret line="104" column="57" selection-start-line="104" selection-start-column="57" selection-end-line="104" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -117,17 +115,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/homework1.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="25" column="89" lean-forward="true" selection-start-line="25" selection-start-column="89" selection-end-line="25" selection-end-column="89" />
+            <state relative-caret-position="425">
+              <caret line="25" column="89" selection-start-line="25" selection-start-column="89" selection-end-line="25" selection-end-column="89" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Readme.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="47" column="83" selection-start-line="47" selection-start-column="83" selection-end-line="47" selection-end-column="83" />
+            <state relative-caret-position="374">
+              <caret line="22" column="74" lean-forward="true" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -173,11 +171,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="840" />
-    <option name="y" value="24" />
-    <option name="width" value="840" />
-    <option name="height" value="1026" />
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="y" value="28" />
+    <option name="width" value="960" />
+    <option name="height" value="1052" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -188,7 +185,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/homework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
@@ -246,7 +243,10 @@
       <workItem from="1540488943066" duration="9277000" />
       <workItem from="1540535107139" duration="4485000" />
       <workItem from="1540561428717" duration="6184000" />
-      <workItem from="1540569703934" duration="87000" />
+      <workItem from="1540569703934" duration="174000" />
+      <workItem from="1541257063221" duration="55000" />
+      <workItem from="1545044744702" duration="5451000" />
+      <workItem from="1545117280063" duration="1224000" />
     </task>
     <task id="LOCAL-00001" summary="Task 1 ready - tested locally + checker">
       <created>1540491937334</created>
@@ -262,14 +262,21 @@
       <option name="project" value="LOCAL" />
       <updated>1540498470337</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Completed README + code cleanup">
+      <created>1540569858833</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1540569858833</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44443000" />
+    <option name="totallyTimeSpent" value="51260000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="23" width="1682" height="1028" extended-state="6" />
+    <frame x="0" y="28" width="960" height="1052" extended-state="4" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24940334" />
@@ -303,7 +310,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Task 1 ready - tested locally + checker" />
     <MESSAGE value="Task 2 ready - local + checker" />
-    <option name="LAST_COMMIT_MESSAGE" value="Task 2 ready - local + checker" />
+    <MESSAGE value="Completed README + code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed README + code cleanup" />
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -389,22 +397,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/homework.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Readme.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="83" selection-start-line="47" selection-start-column="83" selection-end-line="47" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/homework1.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="25" column="89" lean-forward="true" selection-start-line="25" selection-start-column="89" selection-end-line="25" selection-end-column="89" />
+        <state relative-caret-position="289">
+          <caret line="17" column="27" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -415,10 +409,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/homework1.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="89" selection-start-line="25" selection-start-column="89" selection-end-line="25" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/homework.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="80" column="67" lean-forward="true" selection-start-line="80" selection-start-column="67" selection-end-line="80" selection-end-column="67" />
+        <state relative-caret-position="325">
+          <caret line="104" column="57" selection-start-line="104" selection-start-column="57" selection-end-line="104" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Readme.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="74" lean-forward="true" selection-start-line="22" selection-start-column="74" selection-end-line="22" selection-end-column="74" />
         </state>
       </provider>
     </entry>
